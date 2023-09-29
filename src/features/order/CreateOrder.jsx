@@ -37,7 +37,8 @@ function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
-  const formErrors = useActionData();
+  const formErrors = useActionData(); // data returned from the action function connected to the component
+
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
