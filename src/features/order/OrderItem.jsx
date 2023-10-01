@@ -1,16 +1,19 @@
-function OrderItem({ item, isLoadingIngredients, ingredients }) {
-  const { quantity, name, totalPrice } = item;
+import { formatCurrency } from '../../utilities/helpers'
 
-  return (
-    <li>
-      <div>
-        <p>
-          <span>{quantity}&times;</span> {name}
-        </p>
-        <p>{formatCurrency(totalPrice)}</p>
-      </div>
-    </li>
-  );
+/* eslint-disable react/prop-types */
+function OrderItem({ item }) {
+    const { quantity, name, totalPrice } = item
+
+    return (
+        <li className="py-3">
+            <div className="flex items-center justify-between text-sm">
+                <p>
+                    <span className="font-bold">{quantity}&times;</span> {name}
+                </p>
+                <p className="font-bold">{formatCurrency(totalPrice)}</p>
+            </div>
+        </li>
+    )
 }
 
-export default OrderItem;
+export default OrderItem
