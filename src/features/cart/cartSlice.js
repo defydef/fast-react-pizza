@@ -42,7 +42,7 @@ const cartSlice = createSlice({
             item.quantity--
             item.totalPrice = item.quantity * item.unitPrice
         },
-        clearCart(state, action) {
+        clearCart(state) {
             state.cart = []
         },
     },
