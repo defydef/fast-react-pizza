@@ -1,14 +1,15 @@
 import { formatCurrency } from '../../utilities/helpers'
 import Button from '../../ui/Button'
-import { useDispatch } from 'react-redux'
-import { addItem } from '../cart/cartSlice'
+import DeleteItem from '../cart/DeleteItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem, getQtyById } from '../cart/cartSlice'
 // import { useNavigate } from 'react-router-dom'
 
 /* eslint-disable react/prop-types */
 function MenuItem({ pizza }) {
     const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza
     const dispatch = useDispatch()
-    // const navigate = useNavigate()
+    const cartQty = useSelector(getQtyById(id))
 
     function addItemToCart() {
         const newItem = {
@@ -42,7 +43,8 @@ function MenuItem({ pizza }) {
                             Sold out
                         </p>
                     )}
-                    {!soldOut && (
+                    {!soldOut && cartQty > 0 && <DeleteItem pizzaId={id} />}
+                    {!soldOut && !cartQty && (
                         <Button type="small" onClick={addItemToCart}>
                             Add to cart
                         </Button>
