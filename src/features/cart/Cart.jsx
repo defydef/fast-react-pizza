@@ -30,7 +30,6 @@ import { useSelector } from 'react-redux'
 function Cart() {
     const cart = useSelector((store) => store.cart.cart)
     const username = useSelector((store) => store.user.username)
-    console.log(cart)
 
     return (
         <div className="px-4 py-3">
