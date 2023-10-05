@@ -3,7 +3,6 @@ import Button from '../../ui/Button'
 import DeleteItem from '../cart/DeleteItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem, getQtyById } from '../cart/cartSlice'
-// import { useNavigate } from 'react-router-dom'
 
 /* eslint-disable react/prop-types */
 function MenuItem({ pizza }) {
@@ -20,7 +19,6 @@ function MenuItem({ pizza }) {
             totalPrice: unitPrice,
         }
         dispatch(addItem(newItem))
-        // navigate('/cart')
     }
 
     return (
@@ -43,7 +41,7 @@ function MenuItem({ pizza }) {
                             Sold out
                         </p>
                     )}
-                    {!soldOut && cartQty > 0 && <DeleteItem pizzaId={id} />}
+                    {cartQty > 0 && <DeleteItem pizzaId={id} />}
                     {!soldOut && !cartQty && (
                         <Button type="small" onClick={addItemToCart}>
                             Add to cart
