@@ -3,6 +3,7 @@ import Button from '../../ui/Button'
 import DeleteItem from '../cart/DeleteItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem, getQtyById } from '../cart/cartSlice'
+import UpdateItemQty from '../cart/UpdateItemQty'
 
 /* eslint-disable react/prop-types */
 function MenuItem({ pizza }) {
@@ -41,7 +42,13 @@ function MenuItem({ pizza }) {
                             Sold out
                         </p>
                     )}
-                    {cartQty > 0 && <DeleteItem pizzaId={id} />}
+                    {cartQty > 0 && (
+                        <div className="flex justify-between gap-3">
+                            <UpdateItemQty pizzaId={id} cartQty={cartQty} />{' '}
+                            <DeleteItem pizzaId={id} />
+                        </div>
+                    )}
+
                     {!soldOut && !cartQty && (
                         <Button type="small" onClick={addItemToCart}>
                             Add to cart
