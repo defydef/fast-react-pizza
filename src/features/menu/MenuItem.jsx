@@ -43,7 +43,7 @@ function MenuItem({ pizza }) {
                         </p>
                     )}
                     {cartQty > 0 && (
-                        <div className="flex justify-between gap-3">
+                        <div className="flex items-center gap-3 sm:gap-8">
                             <UpdateItemQty pizzaId={id} cartQty={cartQty} />{' '}
                             <DeleteItem pizzaId={id} />
                         </div>

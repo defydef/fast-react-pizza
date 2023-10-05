@@ -7,7 +7,7 @@ function UpdateItemQty({ pizzaId, cartQty }) {
     const dispatch = useDispatch()
 
     return (
-        <div className="flex items-center gap-1 md:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3">
             <Button
                 type="round"
                 onClick={() => dispatch(decreaseItemQty(pizzaId))}
