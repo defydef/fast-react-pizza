@@ -1,6 +1,6 @@
 // Test ID: IIDSAT
 
-import { useLoaderData } from 'react-router-dom'
+import { useFetcher, useLoaderData } from 'react-router-dom'
 import { getOrder } from '../../services/apiRestaurant'
 import {
     calcMinutesLeft,
@@ -8,6 +8,7 @@ import {
     formatDate,
 } from '../../utilities/helpers'
 import OrderItem from './OrderItem'
+import { useEffect } from 'react'
 
 // const order = {
 //   id: "ABCDEF",
@@ -58,6 +59,26 @@ function Order() {
     } = order
     const deliveryIn = calcMinutesLeft(estimatedDelivery)
 
+    const fetcher = useFetcher()
+    useEffect(
+        function () {
+            if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu') // load data from loader function in /menu route
+        },
+        [fetcher]
+    )
+    const menu = fetcher.data
+    const updatedCart = cart.map((item) => {
+        return {
+            name: item.name,
+            pizzaId: item.pizzaId,
+            quantity: item.quantity,
+            totalPrice: item.totalPrice,
+            unitPrice: item.unitPrice,
+            ingredients: menu?.find((menuItem) => menuItem.id === item.pizzaId)
+                ?.ingredients,
+        }
+    })
+
     const labelClass =
         'flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0'
 
@@ -92,7 +113,7 @@ function Order() {
             </div>
 
             <ul className="divide-y divide-stone-200 border-b border-t">
-                {cart.map((pizza) => (
+                {updatedCart.map((pizza) => (
                     <OrderItem key={pizza.pizzaId} item={pizza} />
                 ))}
             </ul>

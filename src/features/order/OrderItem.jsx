@@ -2,7 +2,7 @@ import { formatCurrency } from '../../utilities/helpers'
 
 /* eslint-disable react/prop-types */
 function OrderItem({ item }) {
-    const { quantity, name, totalPrice } = item
+    const { ingredients, quantity, name, totalPrice } = item
 
     return (
         <li className="py-3">
@@ -10,8 +10,10 @@ function OrderItem({ item }) {
                 <p>
                     <span className="font-bold">{quantity}&times;</span> {name}
                 </p>
+
                 <p className="font-bold">{formatCurrency(totalPrice)}</p>
             </div>
+            <div className="text-xs">{ingredients?.toString()}</div>
         </li>
     )
 }
