@@ -9,6 +9,7 @@ import {
 } from '../../utilities/helpers'
 import OrderItem from './OrderItem'
 import { useEffect } from 'react'
+import UpdateOrder from './UpdateOrder'
 
 // const order = {
 //   id: "ABCDEF",
@@ -114,7 +115,11 @@ function Order() {
 
             <ul className="divide-y divide-stone-200 border-b border-t">
                 {updatedCart.map((pizza) => (
-                    <OrderItem key={pizza.pizzaId} item={pizza} />
+                    <OrderItem
+                        key={pizza.pizzaId}
+                        item={pizza}
+                        isLoadingIngredients={fetcher.state === 'loading'}
+                    />
                 ))}
             </ul>
 
@@ -132,6 +137,7 @@ function Order() {
                     {formatCurrency(orderPrice + priorityPrice)}
                 </p>
             </div>
+            {!priority && <UpdateOrder />}
         </div>
     )
 }

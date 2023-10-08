@@ -1,7 +1,7 @@
 import { formatCurrency } from '../../utilities/helpers'
 
 /* eslint-disable react/prop-types */
-function OrderItem({ item }) {
+function OrderItem({ item, isLoadingIngredients }) {
     const { ingredients, quantity, name, totalPrice } = item
 
     return (
@@ -13,7 +13,9 @@ function OrderItem({ item }) {
 
                 <p className="font-bold">{formatCurrency(totalPrice)}</p>
             </div>
-            <div className="text-xs">{ingredients?.toString()}</div>
+            <p className="text-xs capitalize italic text-stone-500">
+                {isLoadingIngredients ? 'Loading...' : ingredients?.toString()}
+            </p>
         </li>
     )
 }
